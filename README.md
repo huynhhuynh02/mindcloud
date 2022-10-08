@@ -10,12 +10,14 @@ php artisan serve
 ```
 npm install
 ```
-``` npm run dev
+```
+npm run dev
 ```
 
 ## Migration and Seeder
 
-```php artisan migrate --seed 
+```
+php artisan migrate --seed 
 ```
 
 ## License
