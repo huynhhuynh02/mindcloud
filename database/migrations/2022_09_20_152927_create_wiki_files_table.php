@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('wiki_files', function (Blueprint $table) {
             $table->id();
+            $table->text('media_url');
+            $table->tinyInteger('media_type');
+            $table->tinyInteger('file_size');
+            $table->unsignedBigInteger('wiki_id');
+            $table->foreign('wiki_id')->references('id')->on('wikis');
             $table->timestamps();
         });
     }
