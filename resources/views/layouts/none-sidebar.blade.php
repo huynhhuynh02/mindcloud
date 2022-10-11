@@ -48,8 +48,18 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">View all projects</a></li>
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Create
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdProjectModal">Create
                                 project</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        People
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdUserModal">Invite user</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdTeamModal">Create team</a></li>
                     </ul>
                 </div>
                 <button class="btn btn-primary" type="submit">Create</button>
@@ -137,6 +147,9 @@
         </div>
     </div>
     @include('shared.project')
+    @include('shared.team')
+    @include('shared.task')
+
     <script>
         const projectName = document.getElementById('projectNameInput');
         const projectKey = document.getElementById('projectKeyInput');

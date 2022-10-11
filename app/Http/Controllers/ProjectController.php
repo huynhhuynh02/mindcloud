@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\Project;
+use App\Models\TaskType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
@@ -39,6 +41,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
+
         $organization_id = Auth::user()->organization_id;
         $user_id = Auth::user()->id;
 
@@ -46,7 +49,7 @@ class ProjectController extends Controller
             'name' => 'required|max:255',
             'key' => 'required|unique:projects|max:255'
         ]);
- 
+
         if ($validator->fails()) {
             return redirect('your-work')
                 ->withErrors($validator)
@@ -59,9 +62,10 @@ class ProjectController extends Controller
         $project->organization_id = $organization_id;
         $project->created_by = $user_id;
         $project->save();
+        //add task type
+        $this->addTaskType($project->id);
 
         return redirect('your-work')->with('status', 'Project created!');
-
     }
 
     /**
@@ -107,5 +111,29 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addTaskType($id)
+    {
+        $tasktype = [
+            [
+                'name' => 'Task',
+                'project_id' => $id,
+            ],
+            [
+                'name' => 'Bug',
+                'project_id' => $id,
+            ],
+            [
+                'name' => 'Request',
+                'project_id' => $id,
+            ],
+            [
+                'name' => 'Other',
+                'project_id' => $id,
+            ],
+        ];
+
+        TaskType::insert($tasktype);
     }
 }

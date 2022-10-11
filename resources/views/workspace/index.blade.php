@@ -18,7 +18,7 @@
                     <a href="{{route('task-created', $project->key)}}" class="card-link">
                         New issues
                     </a>
-                    <a href="" class="card-link">
+                    <a href="{{route('task-lists', $project->key)}}" class="card-link">
                         Issues
                     </a>
                     <a href="" class="card-link">

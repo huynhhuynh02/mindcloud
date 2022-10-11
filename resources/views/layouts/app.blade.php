@@ -18,7 +18,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @vite(['resources/sass/layout.scss'])
-
+    @yield('style')
 </head>
 
 <body>
@@ -49,8 +49,18 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">View all projects</a></li>
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Create
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdProjectModal">Create
                                 project</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        People
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdUserModal">Invite user</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdTeamModal">Create team</a></li>
                     </ul>
                 </div>
                 <button class="btn btn-primary" type="submit">Create</button>
@@ -177,7 +187,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link link-light" href="#">
+                                        <a class="nav-link link-light" href="{{ route('task-lists', request()->key) }}">
                                             Lists
                                         </a>
                                     </li>
@@ -256,6 +266,8 @@
         </div>
     </div>
     @include('shared.project')
+    @include('shared.team')
+    @include('shared.task')
     <script>
         ClassicEditor
             .create(document.querySelector('#textareaDescription'), {
@@ -281,12 +293,13 @@
             document.getElementById('project-form').submit();
         }
     </script>
-    @if ($errors->any())
+    @yield('script')
+    @error('name')
         <script type="module">
             const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
             myModal.show();
         </script>
-    @endif
+    @enderror
 </body>
 
 </html>

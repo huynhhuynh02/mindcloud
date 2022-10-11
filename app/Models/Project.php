@@ -22,4 +22,9 @@ class Project extends Model
      * @var array
      */
     protected $fillable = ['name', 'key', 'description', 'organization_id', 'created_by'];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'project_id');
+    }
 }

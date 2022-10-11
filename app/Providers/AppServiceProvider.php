@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +25,23 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        // Blade::directive('getstatuscolor', function ($status) {
+        //     switch ($status) {
+        //         case 0:
+        //             return 'bg-primary';
+        //             break;
+
+        //         case 1:
+        //             return 'bg-success';
+        //             break;
+
+        //         case 2:
+        //             return 'bg-danger';
+        //             break;
+        //         default:
+        //             # code...
+        //             break;
+        //     }
+        // });
     }
 }

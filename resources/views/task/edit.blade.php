@@ -6,8 +6,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="fw-bold mb-3">Create issue</h4>
-                        <form method="POST" action="{{ route('tasks.store') }}">
+                        <h4 class="fw-bold mb-3">Edit issue</h4>
+                        <form method="POST" action="{{ route('tasks.update', $task) }}">
                             @csrf
                             <div class="row form-group mb-3">
                                 <div class="col-md-5">
@@ -38,7 +38,7 @@
                                 <label for="formGroupExampleInput2" class="form-label">Summary
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="subject" value="{{old('subject')}}" class="form-control @error('subject') is-invalid @enderror" id="formGroupExampleInput2">
+                                <input type="text" name="subject" value="{{ $task->subject }}" class="form-control @error('subject') is-invalid @enderror" id="formGroupExampleInput2">
                                 @error('subject')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="mb-3 form-group">
                                 <label for="textareaDescription" class="form-label">Description</label>
-                                <textarea name="description" class="form-control" id="textareaDescription" rows="5"></textarea>
+                                <textarea name="description" class="form-control" id="textareaDescription" rows="5">{{ $task->description }}</textarea>
                             </div>
                             <div class="row mb-3 form-group">
                                 <div class="col-md-5">
