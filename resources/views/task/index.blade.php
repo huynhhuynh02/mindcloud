@@ -6,6 +6,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+                        <li class="breadcrumb-item"><a href="#">Project name</a></li>
+                        <li class="breadcrumb-item"><a href="#">Tasks</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -51,6 +62,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{ $tasks->links() }}
                     </div>
                 </div>
             </div>

@@ -4,10 +4,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+                        <li class="breadcrumb-item"><a href="#">Project name</a></li>
+                        <li class="breadcrumb-item"><a href="#">Task</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Created</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="fw-bold mb-3">Create issue</h4>
-                        <form method="POST" action="{{ route('tasks.store') }}">
+                        <form method="POST" action="{{ route('tasks.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row form-group mb-3">
                                 <div class="col-md-5">
@@ -38,7 +50,8 @@
                                 <label for="formGroupExampleInput2" class="form-label">Summary
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="subject" value="{{old('subject')}}" class="form-control @error('subject') is-invalid @enderror" id="formGroupExampleInput2">
+                                <input type="text" name="subject" value="{{ old('subject') }}"
+                                    class="form-control @error('subject') is-invalid @enderror" id="formGroupExampleInput2">
                                 @error('subject')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,14 +75,20 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formFileMultiple" class="form-label">Attachment</label>
-                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                <input class="form-control" name="files[]" type="file" id="formFileMultiple" multiple>
                             </div>
                             <div class="mb-3">
-                                <input name="project_id" class="form-control" type="hidden" id="hiddenID" value="{{$project->id}}">
+                                <input name="project_id" class="form-control" type="hidden" id="hiddenID"
+                                    value="{{ $project->id }}">
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </form>
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

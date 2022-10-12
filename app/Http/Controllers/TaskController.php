@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Files;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskAssignees;
+use App\Models\TaskFiles;
 use App\Models\TaskType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
@@ -27,7 +32,9 @@ class TaskController extends Controller
             abort(404);
         }
 
-        $tasks = $project->tasks;
+        $tasks = Task::where('project_id', $project->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
 
         return view('task.index', [
             'tasks' => $tasks
@@ -62,38 +69,58 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $organization_id = Auth::user()->organization_id;
-        $user_id = Auth::user()->id;
-        $validator = Validator::make($request->all(), [
-            'subject' => 'required|max:255'
-        ]);
- 
-        if ($validator->fails()) {
-            return Redirect::back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-        $project = Project::findOrFail($request->project_id);
-        if(!$project) {
-            abort(404);
-        }
-        $task = new Task();
-        $task->subject = $request->subject;
-        $task->description = $request->description;
-        $task->project_id = $project->id;
-        $task->task_type_id = $request->type;
-        $task->status = $request->status;
-        $task->created_by = $user_id;
-        $task->save();
-        
-        $taskassignee = new TaskAssignees();
-        $taskassignee->user_id = $request->assignee;
-        $taskassignee->task_id = $task->id;
-        $taskassignee->save();
+        DB::beginTransaction();
+        try {
+            $organization_id = Auth::user()->organization_id;
+            $files = [];
+            $user_id = Auth::user()->id;
+            $validator = Validator::make($request->all(), [
+                'subject' => 'required|max:255'
+            ]);
+     
+            if ($validator->fails()) {
+                return Redirect::back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+            $project = Project::findOrFail($request->project_id);
+            if(!$project) {
+                abort(404);
+            }
+            if($request->hasFile('files')){
+                $files = $this->uploadFileToS3($request, $project);
+            }
+            
+            $task = new Task();
+            $task->subject = $request->subject;
+            $task->description = $request->description;
+            $task->project_id = $project->id;
+            $task->task_type_id = $request->type;
+            $task->status = $request->status;
+            $task->created_by = $user_id;
+            $task->save();
+            
+            if(count($files) > 0) {
+                foreach ($files as $file) {
+                    $taksfiles = new TaskFiles();
+                    $taksfiles->task_id = $task->id;
+                    $taksfiles->file_id = $file->id;
+                    $taksfiles->save();
+                }
+            }
+    
+            $taskassignee = new TaskAssignees();
+            $taskassignee->user_id = $request->assignee;
+            $taskassignee->task_id = $task->id;
+            $taskassignee->save();
 
-        
-        return Redirect::route('task-lists', $project->key);
+            DB::commit();
+            return Redirect::route('task-lists', $project->key);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return Redirect::back()->with('error', 'An error has occurred, please contact the administrator');
+        }
     }
 
     /**
@@ -150,7 +177,6 @@ class TaskController extends Controller
             'users' => $users,
             'tasktypes' => $tasktypes,
         ]);
-
     }
 
     /**
@@ -174,5 +200,30 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadFileToS3($request, $project)
+    {
+        $s3 = Storage::disk('s3');
+        $uploads = [];
+
+        $files = $request->file('files');
+        foreach ($files as $file) {
+            $file_name = $file->getClientOriginalName();
+            $file_ext = $file->getClientOriginalExtension();
+            $file_size = $file->getSize();
+            $path = $s3->putFileAs('upload', new File($file), $file_name);
+            $file = new Files();
+            $file->name = $file_name;
+            $file->ext = $file_ext;
+            $file->size = $file_size;
+            $file->url = 'http://s3-ap-northeast-1.amazonaws.com/'.env('AWS_BUCKET').'/'.$path;
+            $file->project_id = $project->id;
+            $file->save();
+
+            $uploads[] = $file;
+        }
+
+        return $uploads;
     }
 }

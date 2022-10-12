@@ -38,6 +38,11 @@ class Task extends Model
         return $this->belongsTo(TaskType::class, 'task_type_id');
     }
 
+    public function taskfiles()
+    {
+        return $this->belongsToMany(Files::class, 'task_files', 'task_id', 'file_id');
+    }
+
     public function getStatusColor()
     {
         switch ($this->status) {
