@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@section('style')
-    @vite(['resources/sass/task.scss'])
-@endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">

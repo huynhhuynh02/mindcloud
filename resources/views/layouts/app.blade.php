@@ -16,8 +16,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    @vite(['resources/sass/layout.scss'])
+    @vite('resources/js/app.js')
     @yield('style')
 </head>
 
