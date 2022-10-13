@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', App\Http\Controllers\TaskController::class)->only([
         'update', 'store'
     ]);
+    Route::resource('invites', App\Http\Controllers\InviteController::class);
     Route::post('/attachment', [App\Http\Controllers\TaskFileController::class, 'store'])->name('attachment-task');
     Route::resource('organization-settings', App\Http\Controllers\OrganizationController::class);
     Route::resource('projects', App\Http\Controllers\ProjectController::class);

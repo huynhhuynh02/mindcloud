@@ -58,7 +58,7 @@
                         People
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdUserModal">Invite user</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUserModal">Invite user</a></li>
                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdTeamModal">Create team</a></li>
                     </ul>
                 </div>
@@ -266,6 +266,7 @@
     </div>
     @include('shared.project')
     @include('shared.team')
+    @include('shared.invite')
     @include('shared.task')
     <script>
         ClassicEditor
