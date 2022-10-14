@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Invite;
+use App\Models\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,9 +18,10 @@ class InviteCreated extends Mailable
      *
      * @return void
      */
-    public function __construct(Invite $invite)
+    public function __construct(Invite $invite, Organization $organization)
     {
         $this->invite = $invite;
+        $this->organization = $organization;
     }
 
     /**
@@ -29,6 +31,13 @@ class InviteCreated extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@example')->view('mails.invite_user');
+        return $this->from(env('MAIL_FROM_ADDRESS', 'huynhhuynh02@gmail.com'))
+            ->subject($this->organization->name." invited you to MindCloud")
+            ->markdown(
+                'mails.invite_user',[
+                    'invite' => $this->invite,
+                    'organization' => $this->organization,
+                ]
+            );
     }
 }

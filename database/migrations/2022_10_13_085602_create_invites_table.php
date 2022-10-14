@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->string('token', 16)->unique();
+            $table->unsignedBigInteger('organization_id');
+            $table->foreign('organization_id')->references('id')->on('organizations');
             $table->timestamps();
         });
     }

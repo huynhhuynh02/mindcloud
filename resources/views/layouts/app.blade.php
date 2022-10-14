@@ -58,8 +58,10 @@
                         People
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUserModal">Invite user</a></li>
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdTeamModal">Create team</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#inviteUserModal">Invite
+                                user</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createdTeamModal">Create
+                                team</a></li>
                     </ul>
                 </div>
                 <button class="btn btn-primary" type="submit">Create</button>
@@ -186,7 +188,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link link-light" href="{{ route('task-lists', request()->key) }}">
+                                        <a class="nav-link link-light"
+                                            href="{{ route('task-lists', request()->key) }}">
                                             Lists
                                         </a>
                                     </li>
@@ -261,6 +264,11 @@
                 <main class="content">
                     @yield('content')
                 </main>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -291,6 +299,10 @@
 
         function creatProject() {
             document.getElementById('project-form').submit();
+        }
+
+        function inviteUser() {
+            document.getElementById('invite-form').submit();
         }
     </script>
     @yield('script')

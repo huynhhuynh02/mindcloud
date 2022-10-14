@@ -22,4 +22,9 @@ class Organization extends Model
      * @var array
      */
     protected $fillable = ['name', 'key'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'organization_id');
+    }
 }
