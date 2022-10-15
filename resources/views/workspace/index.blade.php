@@ -8,8 +8,8 @@
             @if (count($projects) > 0)
             @foreach ($projects as $project)
             <div class="card mb-3">
-                <div class="card-header bg-primary">
-                    <a href="{{route('dashboard', $project->key)}}" class="text-white">{{ $project->name }}</a>
+                <div class="card-header bg-light">
+                    <a href="{{route('dashboard', $project->key)}}" class="nav-link link-secondary">{{ $project->name }}</a>
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{ $project->description }}</p>

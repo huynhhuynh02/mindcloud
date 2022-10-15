@@ -65,8 +65,8 @@ class InviteController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        $user = User::created([
+        
+        User::create([
             'email' => $request->email,
             'name' => $request->name,
             'organization_id' => $invite->organization_id,

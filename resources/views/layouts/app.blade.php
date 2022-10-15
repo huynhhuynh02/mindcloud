@@ -22,18 +22,13 @@
 
 <body>
     <div id="app">
-        <nav class="navbar shadow navbar-expand navbar-light navbar-bg">
+        <nav class="navbar shadow navbar-expand navbar-dark bd-navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                        class="bi bi-cloud" viewBox="0 0 16 16">
-                        <path
-                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
-                    </svg>
-                    mindCloud
+                    MindCloud
                 </a>
                 <div class="dropdown me-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Your work
                     </a>
@@ -42,7 +37,7 @@
                     </ul>
                 </div>
                 <div class="dropdown me-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Projects
                     </a>
@@ -53,7 +48,7 @@
                     </ul>
                 </div>
                 <div class="dropdown me-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         People
                     </a>
@@ -64,7 +59,7 @@
                                 team</a></li>
                     </ul>
                 </div>
-                <button class="btn btn-primary" type="submit">Create</button>
+                <button class="btn btn-primary btn-sm" type="submit">Create</button>
                 <!-- <button type="button" class="btn btn-primary rounded-circle" width="40px" height="40px">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
@@ -74,7 +69,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item me-2">
                             <form class="d-flex" role="search">
-                                <div class="input-group">
+                                <div class="input-group input-group-sm">
                                     <input type="text" class="form-control" placeholder="Search projects"
                                         aria-label="Search projects" aria-describedby="button-addon2">
                                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">
@@ -88,7 +83,7 @@
                             </form>
                         </li>
                         <li class="nav-item me-2">
-                            <a class="position-relative nav-link" href="http://" target="_blank"
+                            <a class="position-relative nav-link link-light" href="http://" target="_blank"
                                 rel="noopener noreferrer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -102,7 +97,7 @@
                             </a>
                         </li>
                         <li class="nav-item me-2">
-                            <a class="nav-link" href="http://" target="_blank" rel="noopener noreferrer">
+                            <a class="nav-link link-light" href="http://" target="_blank" rel="noopener noreferrer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -114,7 +109,7 @@
                         <li class="nav-item">
                             <div class="dropdown">
                                 @auth
-                                    <a class="nav-link d-flex align-items-center dropdown-toggle" href="#"
+                                    <a class="nav-link link-light d-flex align-items-center dropdown-toggle" href="#"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ Auth::user()->name }}
                                     </a>
@@ -141,7 +136,7 @@
             </div>
         </nav>
         <div class="wrapper">
-            <nav id="sidebar" class="sidebar">
+            <nav id="sidebar" class="sidebar border-end">
                 <div class="sidebar-wrapper">
                     <div class="sidebar-content">
                         <ul class="nav flex-column sidebar-nav">
@@ -149,7 +144,7 @@
                                 Manager
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-light active"
+                                <a class="nav-link link-secondary"
                                     href="{{ route('dashboard', request()->key) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
@@ -168,7 +163,7 @@
                                 </a>
                             </li> -->
                             <li class="nav-item">
-                                <a class="nav-link link-light" data-bs-toggle="collapse" href="#collapseExample"
+                                <a class="nav-link link-secondary" data-bs-toggle="collapse" href="#collapseExample"
                                     role="button" aria-expanded="false" aria-controls="collapseExample"
                                     aria-current="page" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -182,13 +177,13 @@
                                 </a>
                                 <ul class="list-unstyled sidebar-dropdown collapse" id="collapseExample">
                                     <li class="nav-item">
-                                        <a class="nav-link link-light"
+                                        <a class="nav-link link-secondary"
                                             href="{{ route('task-created', request()->key) }}">
                                             New
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link link-light"
+                                        <a class="nav-link link-secondary"
                                             href="{{ route('task-lists', request()->key) }}">
                                             Lists
                                         </a>
@@ -196,7 +191,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-light" href="#">
+                                <a class="nav-link link-secondary" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-kanban" viewBox="0 0 16 16">
                                         <path
@@ -208,7 +203,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-light" href="#">
+                                <a class="nav-link link-secondary" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-bar-chart-steps" viewBox="0 0 16 16">
                                         <path
@@ -218,7 +213,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-light" href="#">
+                                <a class="nav-link link-secondary" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-file-earmark-word" viewBox="0 0 16 16">
                                         <path
@@ -230,7 +225,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-light" href="#">
+                                <a class="nav-link link-secondary" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-file-earmark-diff" viewBox="0 0 16 16">
                                         <path
@@ -245,7 +240,7 @@
                                 App setting
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-light" href="#">
+                                <a class="nav-link link-secondary" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                                         <path

@@ -26,7 +26,7 @@
                                     <label for="issueType" class="form-label">Issue type
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <select name="type" class="form-select selectpicker" id="issueType">
+                                    <select name="type" class="form-select" id="issueType">
                                         @foreach ($tasktypes as $type)
                                             <option value="{{ $type->id }}" selected>{{ $type->name }}</option>
                                         @endforeach
