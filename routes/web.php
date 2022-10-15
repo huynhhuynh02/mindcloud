@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::resource('invites', App\Http\Controllers\InviteController::class)->only([
+    'index', 'store',
+]);
+Route::post('/invites-user', [App\Http\Controllers\InviteController::class, 'process'])->name('invite-process');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/your-work', [App\Http\Controllers\HomeController::class, 'workspace'])->name('workspace');
@@ -26,10 +31,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', App\Http\Controllers\TaskController::class)->only([
         'update', 'store'
     ]);
-    Route::resource('invites', App\Http\Controllers\InviteController::class)->only([
-        'index', 'store',
-    ]);
-    Route::post('/invites-user', [App\Http\Controllers\InviteController::class, 'process'])->name('invite-process');
     Route::post('/attachment', [App\Http\Controllers\TaskFileController::class, 'store'])->name('attachment-task');
     Route::resource('organization-settings', App\Http\Controllers\OrganizationController::class);
     Route::resource('projects', App\Http\Controllers\ProjectController::class);
