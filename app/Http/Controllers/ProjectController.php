@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\TaskType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -135,5 +136,41 @@ class ProjectController extends Controller
         ];
 
         TaskType::insert($tasktype);
+    }
+
+    public function board(Request $request)
+    {
+        $project = Project::where('key', $request->key)->first();
+
+        $opens = Task::where([
+            'status' => 0,
+            'project_id' => $project->id
+        ])->get();
+
+        $inprocess = Task::where([
+            'status' => 1,
+            'project_id' => $project->id
+        ])->get();
+
+        $resolves = Task::where([
+            'status' => 2,
+            'project_id' => $project->id
+        ])->get();
+
+        $closes = Task::where([
+            'status' => 3,
+            'project_id' => $project->id
+        ])->get();
+
+        return view('project.board', [
+            'opens' => $opens,
+            'inprocess' => $inprocess,
+            'resolves' => $resolves,
+            'closes' => $closes,
+            'count_open' => $opens ? count($opens) : 0 ,
+            'count_inprocess' => $inprocess ? count($inprocess) : 0,
+            'count_resolve' => $resolves ? count($resolves) : 0,
+            'count_close' => $closes ? count($closes) : 0
+        ]);
     }
 }

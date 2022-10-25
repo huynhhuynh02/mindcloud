@@ -72,7 +72,7 @@
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control" placeholder="Search projects"
                                         aria-label="Search projects" aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                                    <button class="btn btn-secondary" type="button" id="button-addon2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                             <path
@@ -191,7 +191,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-secondary" href="#">
+                                <a class="nav-link link-secondary" href="{{ route('project-board', request()->key) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-kanban" viewBox="0 0 16 16">
                                         <path

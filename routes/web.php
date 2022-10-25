@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects/{key}/tasks/list', [App\Http\Controllers\TaskController::class, 'index'])->name('task-lists');
     Route::get('/projects/{key}/tasks/{task_id}/edit', [App\Http\Controllers\TaskController::class, 'edit'])->name('task-edit');
     Route::get('/projects/{key}/tasks/{task_id}', [App\Http\Controllers\TaskController::class, 'show'])->name('task-show');
+    Route::get('/projects/{key}/board', [App\Http\Controllers\ProjectController::class, 'board'])->name('project-board');
     Route::resource('tasks', App\Http\Controllers\TaskController::class)->only([
         'update', 'store'
     ]);
