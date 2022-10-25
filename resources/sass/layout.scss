@@ -21,6 +21,9 @@
                     height: 18px;
                 }
             }
+            & .active {
+                border-right: 3px solid #052B64;
+            }
         }
         .sidebar-dropdown {
             .nav-link {
@@ -59,7 +62,7 @@
         }
     }
     .main {
-        width: 100%;
+        width: calc(100% - 250px);
         min-height: 100vh;
         display: flex;
         flex-direction: column;

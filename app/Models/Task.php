@@ -21,7 +21,7 @@ class Task extends Model
      *
      * @var array
      */
-    protected $fillable = ['subject', 'description', 'project_id', 'created_by'];
+    protected $fillable = ['text', 'description', 'project_id', 'created_by'];
 
     public function createdby()
     {

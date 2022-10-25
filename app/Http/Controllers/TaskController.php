@@ -9,6 +9,7 @@ use App\Models\TaskAssignees;
 use App\Models\TaskFiles;
 use App\Models\TaskType;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -75,7 +76,7 @@ class TaskController extends Controller
             $files = [];
             $user_id = Auth::user()->id;
             $validator = Validator::make($request->all(), [
-                'subject' => 'required|max:255'
+                'text' => 'required|max:255'
             ]);
      
             if ($validator->fails()) {
@@ -92,11 +93,15 @@ class TaskController extends Controller
             }
             
             $task = new Task();
-            $task->subject = $request->subject;
+            $task->text = $request->text;
             $task->description = $request->description;
             $task->project_id = $project->id;
             $task->task_type_id = $request->type;
             $task->status = $request->status;
+            if($request->has('end_date')) {
+                $task->end_date = $request->end_date;
+            }
+            $task->start_date = Carbon::now();
             $task->created_by = $user_id;
             $task->save();
             

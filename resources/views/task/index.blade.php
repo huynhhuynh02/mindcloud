@@ -24,8 +24,6 @@
                                         <th scope="col">Summary</th>
                                         <th scope="col">Assignee</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Start date</th>
                                         <th scope="col">Due date</th>
                                         <th scope="col">Created by</th>
                                         <th scope="col">Created at</th>
@@ -37,7 +35,7 @@
                                         <tr onclick="window.location.href= '{{ route('task-show', [request()->key, $task->id]) }}'">
                                             <td class="col"><span class="badge {{ $task->getTypeColor($task->tasktype->name) }}">{{ $task->tasktype->name }}</span>
                                             </td>
-                                            <td class="col">{{ $task->subject }}</td>
+                                            <td class="col">{{ $task->text }}</td>
                                             <td class="col">
                                                 @if(count($task->assignees) > 0)
                                                     @foreach ($task->assignees as $assignee)
@@ -48,9 +46,7 @@
                                             <td class="col"><span
                                                     class="badge {{ $task->getStatusColor() }}">{{ $task->getStatusName($task->status) }}</span>
                                             </td>
-                                            <td class="col"></td>
-                                            <td class="col"></td>
-                                            <td class="col"></td>
+                                            <td class="col">{{ $task->end_date}}</td>
                                             <td class="col">{{ $task->createdby->name }}</td>
                                             <td class="col">{{ $task->created_at }}</td>
                                             <td class="col"></td>

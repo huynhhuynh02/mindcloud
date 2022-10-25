@@ -38,8 +38,8 @@
                                 <label for="formGroupExampleInput2" class="form-label">Summary
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="subject" value="{{ $task->subject }}" class="form-control @error('subject') is-invalid @enderror" id="formGroupExampleInput2">
-                                @error('subject')
+                                <input type="text" name="text" value="{{ $task->text }}" class="form-control @error('text') is-invalid @enderror" id="formGroupExampleInput2">
+                                @error('text')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -13,9 +13,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
     <!-- Scripts -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
+    <script src="https://cdn.tiny.cloud/1/3lmbjkxt51nfjaegi9llaumiajkuyeferq8rjc2z2imxp8ch/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @vite('resources/js/app.js')
     @yield('style')
 </head>
@@ -144,7 +145,7 @@
                                 Manager
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-secondary"
+                                <a class="nav-link link-secondary {{ request()->is('projects/*/dashboard') ? 'active' : '' }}"
                                     href="{{ route('dashboard', request()->key) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
@@ -163,7 +164,7 @@
                                 </a>
                             </li> -->
                             <li class="nav-item">
-                                <a class="nav-link link-secondary" data-bs-toggle="collapse" href="#collapseExample"
+                                <a class="nav-link link-secondary {{ request()->is('projects/*/tasks/*') ? 'active' : '' }}" data-bs-toggle="collapse" href="#collapseExample"
                                     role="button" aria-expanded="false" aria-controls="collapseExample"
                                     aria-current="page" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -191,7 +192,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-secondary" href="{{ route('project-board', request()->key) }}">
+                                <a class="nav-link link-secondary {{ request()->is('projects/*/board') ? 'active' : '' }}" href="{{ route('project-board', request()->key) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-kanban" viewBox="0 0 16 16">
                                         <path
@@ -203,7 +204,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-secondary" href="#">
+                                <a class="nav-link link-secondary {{ request()->is('projects/*/gantt-chart') ? 'active' : '' }}" href="{{ route('gantt-chart', request()->key) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-bar-chart-steps" viewBox="0 0 16 16">
                                         <path
@@ -272,13 +273,12 @@
     @include('shared.invite')
     @include('shared.task')
     <script>
-        ClassicEditor
-            .create(document.querySelector('#textareaDescription'), {
-                minHeight: '300px'
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false,
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
 
         const projectName = document.getElementById('projectNameInput');
         const projectKey = document.getElementById('projectKeyInput');

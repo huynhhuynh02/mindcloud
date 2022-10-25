@@ -173,4 +173,20 @@ class ProjectController extends Controller
             'count_close' => $closes ? count($closes) : 0
         ]);
     }
+
+    public function ganttChart(Request $request)
+    {
+        return view('project.gantt');
+    }
+
+    public function ganttApi(Request $request)
+    {
+        $project = Project::where('key', $request->key)->first();
+        $tasks = Task::where('project_id', $project->id)->get();
+
+        return response() -> json([
+            'data' => $tasks
+        ]);
+    }
+    
 }

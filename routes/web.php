@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects/{key}/tasks/{task_id}/edit', [App\Http\Controllers\TaskController::class, 'edit'])->name('task-edit');
     Route::get('/projects/{key}/tasks/{task_id}', [App\Http\Controllers\TaskController::class, 'show'])->name('task-show');
     Route::get('/projects/{key}/board', [App\Http\Controllers\ProjectController::class, 'board'])->name('project-board');
+    Route::get('/projects/{key}/gantt-api', [App\Http\Controllers\ProjectController::class, 'ganttApi'])->name('gantt-api');
+    Route::get('/projects/{key}/gantt-chart', [App\Http\Controllers\ProjectController::class, 'ganttChart'])->name('gantt-chart');
     Route::resource('tasks', App\Http\Controllers\TaskController::class)->only([
         'update', 'store'
     ]);

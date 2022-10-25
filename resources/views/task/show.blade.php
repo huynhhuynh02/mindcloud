@@ -17,7 +17,7 @@
             <div class="col-md-8">
                 <div class="card mb-5">
                     <div class="card-body">
-                        <h2 class="fw-bold">{{ $task->subject }}</h2>
+                        <h2 class="fw-bold">{{ $task->text }}</h2>
                         <div class="task-action mb-3">
                             <form method="POST" action="{{route('attachment-task')}}" enctype="multipart/form-data" id="formUploadFile" class="d-inline">
                                 @csrf
