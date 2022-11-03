@@ -8,6 +8,7 @@
                     <div class="card-body">
                         <h4 class="fw-bold mb-3">Edit issue</h4>
                         <form method="POST" action="{{ route('tasks.update', $task) }}">
+                            @method('PUT')
                             @csrf
                             <div class="row form-group mb-3">
                                 <div class="col-md-5">
@@ -66,7 +67,7 @@
                             </div>
                             <div class="mb-3">
                                 <input name="project_id" class="form-control" type="hidden" id="hiddenID" value="{{$project->id}}">
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-success">Update</button>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </form>

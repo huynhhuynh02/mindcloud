@@ -3,13 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Projects</a></li>
-                        <li class="breadcrumb-item"><a href="#">Project name</a></li>
-                        <li class="breadcrumb-item"><a href="#">Tasks</a></li>
-                    </ol>
-                </nav>
+                <h5>Issues list</h5>
             </div>
         </div>
         <div class="row">
@@ -44,7 +38,7 @@
                                                 @endif
                                             </td>
                                             <td class="col"><span
-                                                    class="badge {{ $task->getStatusColor() }}">{{ $task->getStatusName($task->status) }}</span>
+                                                    class="{{ $task->getStatusColor() }}">{{ $task->getStatusName($task->status) }}</span>
                                             </td>
                                             <td class="col">{{ $task->end_date}}</td>
                                             <td class="col">{{ $task->createdby->name }}</td>

@@ -193,7 +193,23 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::findOrFail($request->project_id);
+
+        $task = Task::findOrFail($id);
+        if ($task) {
+            $task->text = $request->text;
+            $task->description = $request->description;
+            $task->created_by = Auth::user()->id;
+            $task->task_type_id = $request->type;
+            $task->status = $request->status;
+            if($request->has('end_date')) {
+                $task->end_date = $request->end_date;
+            }
+            $task->save();
+            
+            return Redirect::route('task-lists', $project->key);
+
+        }
     }
 
     /**

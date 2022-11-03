@@ -47,15 +47,18 @@ class Task extends Model
     {
         switch ($this->status) {
             case 0:
-                return 'bg-primary';
+                return 'text-success';
                 break;
 
             case 1:
-                return 'bg-success';
+                return 'text-warning';
                 break;
 
             case 2:
-                return 'bg-danger';
+                return 'text-info';
+                break;
+            case 3:
+                return 'text-danger';
                 break;
             default:
                 # code...

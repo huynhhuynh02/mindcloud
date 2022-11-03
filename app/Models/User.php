@@ -52,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public function wikis()
+    {
+        return $this->hasMany(Wiki::class, 'created_by');
+    }
+
 }

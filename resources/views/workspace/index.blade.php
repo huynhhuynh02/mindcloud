@@ -21,10 +21,10 @@
                     <a href="{{route('task-lists', $project->key)}}" class="card-link">
                         Issues
                     </a>
-                    <a href="" class="card-link">
+                    <a href="{{route('project-board', $project->key)}}" class="card-link">
                         Board
                     </a>
-                    <a href="" class="card-link">
+                    <a href="{{route('project-page', $project->key)}}" class="card-link">
                         Wiki
                     </a>
                 </div>

@@ -214,7 +214,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-secondary" href="#">
+                                <a class="nav-link link-secondary {{ request()->is('projects/*/wiki*') ? 'active' : '' }}" href="{{ route('project-page', request()->key) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-file-earmark-word" viewBox="0 0 16 16">
                                         <path
@@ -258,6 +258,13 @@
             </nav>
             <div class="main">
                 <main class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @include('shared.breadcrumb')
+                            </div>
+                        </div>
+                    </div>
                     @yield('content')
                 </main>
                 @if (session('error'))

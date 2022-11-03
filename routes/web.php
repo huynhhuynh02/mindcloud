@@ -22,18 +22,28 @@ Route::post('/invites-user', [App\Http\Controllers\InviteController::class, 'pro
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::prefix('projects/{key}')->group(function () {
+        Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('tasks/add', [App\Http\Controllers\TaskController::class, 'create'])->name('task-created');
+        Route::get('tasks/list', [App\Http\Controllers\TaskController::class, 'index'])->name('task-lists');
+        Route::get('tasks/{task_id}/edit', [App\Http\Controllers\TaskController::class, 'edit'])->name('task-edit');
+        Route::get('tasks/{task_id}', [App\Http\Controllers\TaskController::class, 'show'])->name('task-show');
+        Route::get('board', [App\Http\Controllers\ProjectController::class, 'board'])->name('project-board');
+        Route::get('gantt-api', [App\Http\Controllers\ProjectController::class, 'ganttApi'])->name('gantt-api');
+        Route::get('gantt-chart', [App\Http\Controllers\ProjectController::class, 'ganttChart'])->name('gantt-chart');
+        Route::get('wiki', [App\Http\Controllers\WikiController::class, 'index'])->name('project-page');
+        Route::get('wiki/new', [App\Http\Controllers\WikiController::class, 'create'])->name('project-page-new');
+        Route::get('wiki/{page_id}/show', [App\Http\Controllers\WikiController::class, 'show'])->name('page-show');
+        Route::get('wiki/{page_id}/edit', [App\Http\Controllers\WikiController::class, 'edit'])->name('page-edit');
+    });
     Route::get('/your-work', [App\Http\Controllers\HomeController::class, 'workspace'])->name('workspace');
-    Route::get('/projects/{key}/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/projects/{key}/tasks/add', [App\Http\Controllers\TaskController::class, 'create'])->name('task-created');
-    Route::get('/projects/{key}/tasks/list', [App\Http\Controllers\TaskController::class, 'index'])->name('task-lists');
-    Route::get('/projects/{key}/tasks/{task_id}/edit', [App\Http\Controllers\TaskController::class, 'edit'])->name('task-edit');
-    Route::get('/projects/{key}/tasks/{task_id}', [App\Http\Controllers\TaskController::class, 'show'])->name('task-show');
-    Route::get('/projects/{key}/board', [App\Http\Controllers\ProjectController::class, 'board'])->name('project-board');
-    Route::get('/projects/{key}/gantt-api', [App\Http\Controllers\ProjectController::class, 'ganttApi'])->name('gantt-api');
-    Route::get('/projects/{key}/gantt-chart', [App\Http\Controllers\ProjectController::class, 'ganttChart'])->name('gantt-chart');
+   
     Route::resource('tasks', App\Http\Controllers\TaskController::class)->only([
         'update', 'store'
     ]);
+    Route::resource('wikis', App\Http\Controllers\WikiController::class)->only(
+        ['store', 'destroy', 'update']
+    );
     Route::post('/attachment', [App\Http\Controllers\TaskFileController::class, 'store'])->name('attachment-task');
     Route::resource('organization-settings', App\Http\Controllers\OrganizationController::class);
     Route::resource('projects', App\Http\Controllers\ProjectController::class);

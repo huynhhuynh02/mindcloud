@@ -4,18 +4,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Projects</a></li>
-                        <li class="breadcrumb-item"><a href="#">Project name</a></li>
-                        <li class="breadcrumb-item"><a href="#">Task</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Created</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="fw-bold mb-3">Create issue</h4>

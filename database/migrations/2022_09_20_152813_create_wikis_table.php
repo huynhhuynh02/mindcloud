@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('wikis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
             $table->unsignedBigInteger('created_by');
