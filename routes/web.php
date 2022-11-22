@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('gantt-api', [App\Http\Controllers\ProjectController::class, 'ganttApi'])->name('gantt-api');
         Route::get('gantt-chart', [App\Http\Controllers\ProjectController::class, 'ganttChart'])->name('gantt-chart');
         Route::get('wiki', [App\Http\Controllers\WikiController::class, 'index'])->name('project-page');
+        Route::get('files-manager', [App\Http\Controllers\FileController::class, 'index'])->name('files-manager');
         Route::get('wiki/new', [App\Http\Controllers\WikiController::class, 'create'])->name('project-page-new');
         Route::get('wiki/{page_id}/show', [App\Http\Controllers\WikiController::class, 'show'])->name('page-show');
         Route::get('wiki/{page_id}/edit', [App\Http\Controllers\WikiController::class, 'edit'])->name('page-edit');
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/your-work', [App\Http\Controllers\HomeController::class, 'workspace'])->name('workspace');
    
     Route::resource('tasks', App\Http\Controllers\TaskController::class)->only([
-        'update', 'store'
+        'update', 'store', 'destroy'
     ]);
     Route::resource('wikis', App\Http\Controllers\WikiController::class)->only(
         ['store', 'destroy', 'update']

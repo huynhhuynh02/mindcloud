@@ -3,13 +3,21 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h5>Issues list</h5>
+                <div class="d-flex mb-3 justify-content-between">
+                    <h5>Issues list</h5>
+                    <a href="{{ route('task-created', request()->key) }}" class="btn btn-primary">New Issue</a>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead class="table-light">

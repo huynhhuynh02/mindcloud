@@ -218,9 +218,14 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $project = Project::where('key', $request->project_key)->first();
+        $task = Task::findOrFail($id);
+        if(!$task) abort(404);
+        $task->delete();
+
+        return Redirect::route('task-lists', $project->key)->with('status', 'Delete success !');
     }
 
     public function uploadFileToS3($request, $project)
@@ -229,11 +234,12 @@ class TaskController extends Controller
         $uploads = [];
 
         $files = $request->file('files');
+        $folder = $request->project_key;
         foreach ($files as $file) {
             $file_name = $file->getClientOriginalName();
             $file_ext = $file->getClientOriginalExtension();
             $file_size = $file->getSize();
-            $path = $s3->putFileAs('upload', new File($file), $file_name);
+            $path = $s3->putFileAs($folder, new File($file), $file_name);
             $file = new Files();
             $file->name = $file_name;
             $file->ext = $file_ext;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Files;
+use App\Models\Task;
 use App\Models\TaskFiles;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
@@ -104,13 +105,14 @@ class TaskFileController extends Controller
     {
         $s3 = Storage::disk('s3');
         $uploads = [];
-
+        $folder = $request->project_key;
         $files = $request->file('files');
+
         foreach ($files as $file) {
             $file_name = $file->getClientOriginalName();
             $file_ext = $file->getClientOriginalExtension();
             $file_size = $file->getSize();
-            $path = $s3->putFileAs('upload', new File($file), $file_name);
+            $path = $s3->putFileAs($folder, new File($file), $file_name);
             $file = new Files();
             $file->name = $file_name;
             $file->ext = $file_ext;

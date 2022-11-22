@@ -38,7 +38,7 @@
                                     </svg>
                                     Update
                                 </button>
-                                <a type="submit" class="btn btn-secondary">Back</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
                             </div>
                         </form>
                     </div>

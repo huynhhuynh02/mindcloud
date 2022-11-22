@@ -69,6 +69,9 @@
                                 <label for="formFileMultiple" class="form-label">Attachment</label>
                                 <input class="form-control" name="files[]" type="file" id="formFileMultiple" multiple>
                             </div>
+                            <div class="d-none">
+                                <input class="form-control" name="project_key" type="hidden" value="{{ request()->key }}">
+                            </div>
                             <div class="mb-3">
                                 <input name="project_id" class="form-control" type="hidden" id="hiddenID"
                                     value="{{ $project->id }}">

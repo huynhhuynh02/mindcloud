@@ -21,6 +21,7 @@
                                 <input id="inputFile" type="file" name="files[]" class="d-none">
                                 <input type="hidden" name="task_id" class="d-none" value="{{ $task->id }}">
                                 <input type="hidden" name="project_id" class="d-none" value="{{ $task->project->id }}">
+                                <input type="hidden" name="project_key" class="d-none" value="{{ request()->key }}">
                             </form>
                             <button type="button" class="btn btn-light">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -134,7 +135,7 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="#">Clone issues</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                    <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -181,6 +182,10 @@
             </div>
         </div>
     </div>
+    @include('shared.confirm-modal', [
+        'url' => 'tasks.destroy',
+        'id' => $task->id
+    ])
 @endsection
 @section('script')
     <script>
