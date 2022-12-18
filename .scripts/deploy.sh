@@ -8,10 +8,10 @@ echo "Deployment started ..."
 (php artisan down) || true
 
 # Pull the latest version of the app
-sudo git pull
+sudo git pull origin/main
 
 # Install composer dependencies
-composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+sudo composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Clear the old cache
 sudo php artisan clear-compiled
@@ -26,7 +26,7 @@ sudo npm install
 sudo npm run build
 
 # Run database migrations
-php artisan migrate --force
+sudo php artisan migrate --force
 
 # Exit maintenance mode
 php artisan up
