@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,7 @@ class FileController extends Controller
                 return [
                     'name' => $name,
                     'size' => $this->fileSizeConvert(Storage::disk('s3')->size($name)),
-                    'lastModified' => Storage::disk('s3')->lastModified($name),
+                    'lastModified' => date('Y-m-d H:i:s' ,Storage::disk('s3')->lastModified($name)),
                 ];
             });
         return view('files.index', [

@@ -21,7 +21,8 @@
                                     @foreach ($files as $file)                
                                         <tr>
                                             <td class="col"><a href="http://s3-ap-northeast-1.amazonaws.com/mindcloud/{{$file['name']}}" target="__blank">{{ $file['name'] }}</a></td>
-                                            <td class="col"><a href="http://s3-ap-northeast-1.amazonaws.com/mindcloud/{{$file['name']}}" target="__blank">{{ $file['size'] }}</a></td>
+                                            <td class="col">{{ $file['size'] }}</td>
+                                            <td class="col">{{ $file['lastModified'] }}</td>
                                         </tr>
                                     @endforeach
                                     @foreach ($folders as $folder)
@@ -30,7 +31,10 @@
                                         $folder_name = end($folder_arr);
                                     @endphp                           
                                         <tr>
-                                            <td class="col"><a href="{{url()->current()}}/?prefix={{$folder}}">{{ $folder_name }}</a></td>
+                                            <td class="col" colspan="3">
+                                                <i class="fa-solid fa-folder text-warning"></i>
+                                                <a href="{{url()->current()}}/?prefix={{$folder}}">{{ $folder_name }}</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
