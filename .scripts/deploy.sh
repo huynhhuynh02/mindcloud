@@ -11,13 +11,13 @@ echo "Deployment started ..."
 sudo git pull
 
 # Install composer dependencies
-sudo composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Clear the old cache
-sudo php artisan clear-compiled
+php artisan clear-compiled
 
 # Recreate cache
-sudo php artisan optimize
+php artisan optimize
 
 #Install Package
 sudo npm install
@@ -26,9 +26,9 @@ sudo npm install
 sudo npm run build
 
 # Run database migrations
-sudo php artisan migrate --force
+php artisan migrate --force
 
 # Exit maintenance mode
-sudo php artisan up
+php artisan up
 
 echo "Deployment finished!"
