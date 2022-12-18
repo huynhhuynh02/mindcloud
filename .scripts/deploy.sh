@@ -14,10 +14,10 @@ sudo git pull
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Clear the old cache
-php artisan clear-compiled
+sudo php artisan clear-compiled
 
 # Recreate cache
-php artisan optimize
+sudo php artisan optimize
 
 #Install Package
 sudo npm install
